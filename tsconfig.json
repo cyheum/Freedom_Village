@@ -6,7 +6,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
@@ -14,10 +18,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "./src",
-    "paths": {
-      "~/*": ["*"]
-    }
+    "baseUrl": "./src"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
