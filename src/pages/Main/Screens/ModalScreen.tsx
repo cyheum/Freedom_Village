@@ -4,8 +4,23 @@ import { ItemModal } from "components";
 import { useDispatch } from "react-redux";
 import { modalToggle } from "modules/store";
 import { useGetActiveModal } from "hooks";
+import mixin from "styles/mixin";
 
-export const ModalScreen = () => {
+interface IData {
+  iconSrc: string;
+  description: string;
+  textWidth: number;
+  textHeight: number;
+}
+
+interface IProp {
+  rightData: {
+    rightTopData: IData[];
+    rightBottomData: IData[];
+  };
+}
+
+export const ModalScreen: React.FC<IProp> = ({ rightData }) => {
   const activeModal = useGetActiveModal();
   const dispatch = useDispatch();
 
@@ -13,12 +28,14 @@ export const ModalScreen = () => {
     <STDContainer>
       <STDemtpty onClick={() => dispatch(modalToggle(null))} />
       <ItemModal
-        mapImgSrc={"/Images/leftMap.jpg"}
-        leftTopImgSrc={"Images/leftTop.png"}
-        roadImgSrc={"Images/tempRoad.png"}
-        rightTopImgSrc={"Images/rightTopBack.png"}
-        rightBottomImgSrc={"Images/rightBottomBack.png"}
-        storeLogoScr={"Images/rightTopLogo.png"}
+        mapImgSrc={"/Images/detailMap.png"}
+        roadImgSrc={"/Images/streetLogo.png"}
+        rightTopImgSrc={"/Images/storeImg3.png"}
+        rightBottomImgSrc={"/Images/storeImg2.png"}
+        storeLogoScr={"/Images/storeLogo.png"}
+        emptyBlur={"/Images/emptyBlur.png"}
+        rightTopData={rightData.rightTopData}
+        rightBottomData={rightData.rightBottomData}
       />
     </STDContainer>
   );
@@ -27,9 +44,7 @@ export const ModalScreen = () => {
 const STDContainer = styled.div`
   position: fixed;
   top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${mixin.flexSet()};
   width: 100%;
   z-index: 10000;
 `;
@@ -37,5 +52,4 @@ const STDContainer = styled.div`
 const STDemtpty = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
 `;
