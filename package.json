@@ -39,9 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "babel-plugin-root-import": "^6.5.0",
-    "babel-plugin-styled-components": "^1.11.1"
   }
 }

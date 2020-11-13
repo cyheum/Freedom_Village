@@ -1,23 +1,23 @@
-const GET_DATA = "GET_DATA";
+import { GetData, ModalToggle, IStoreState } from "./store.interface";
 
-interface DataType {
-  data: any;
-}
+export const GET_DATA = "GET_DATA";
+export const MODAL_TOGGLE = "MODAL_TOGGLE";
 
-interface GetData {
-  type: typeof GET_DATA;
-  payload: DataType[];
-}
+type contentAction = GetData | ModalToggle;
 
-type contentAction = GetData;
-
-export const getData = (data: DataType) => ({
+export const getData = (data: IStoreState) => ({
   type: GET_DATA,
   payload: data,
 });
 
+export const modalToggle = (id: string | null) => ({
+  type: MODAL_TOGGLE,
+  payload: id,
+});
+
 const INITIAL_STATE = {
   data: [],
+  activeModal: null,
 };
 
 export default function mainStore(
@@ -29,6 +29,11 @@ export default function mainStore(
       return {
         ...state,
         data: action.payload,
+      };
+    case MODAL_TOGGLE:
+      return {
+        ...state,
+        activeModal: action.payload,
       };
     default:
       return state;

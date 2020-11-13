@@ -1,1 +1,1 @@
-export * from "./organizm/Organizm";
+export * from "./organizm/ItemModal";
