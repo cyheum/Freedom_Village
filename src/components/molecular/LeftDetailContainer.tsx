@@ -1,21 +1,16 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { device } from "styles/theme";
 
 interface IProp {
   mapImgSrc: string;
   roadImgSrc: string;
-  leftTopImgSrc: string;
 }
 
-const LeftDetailContainer: React.FC<IProp> = ({
-  mapImgSrc,
-  roadImgSrc,
-  leftTopImgSrc,
-}) => {
+const LeftDetailContainer: React.FC<IProp> = ({ mapImgSrc, roadImgSrc }) => {
   return (
     <STDContainer>
       <STDLeftMap mapImgSrc={mapImgSrc} />
-      <STDLeftTopImg src={leftTopImgSrc} alt="storeImg" />
       <STDRoadLogo roadImgSrc={roadImgSrc} />
     </STDContainer>
   );
@@ -23,16 +18,29 @@ const LeftDetailContainer: React.FC<IProp> = ({
 
 export default LeftDetailContainer;
 
+const FIXED_VAL = {
+  width: 1200,
+  height: 1080,
+};
+
 const STDContainer = styled.div`
   position: relative;
-  width: 55%;
-  height: 100%;
+  width: ${FIXED_VAL.width * 0.4}px;
+  height: ${FIXED_VAL.height * 0.4}px;
+
+  @media ${device.laptopL} {
+    width: ${FIXED_VAL.width * 0.6}px;
+    height: ${FIXED_VAL.height * 0.6}px;
+  }
+  @media ${device.desktopL} {
+    width: ${FIXED_VAL.width}px;
+    height: ${FIXED_VAL.height}px;
+  }
 `;
 
 const STDLeftMap = styled.div<{ mapImgSrc: string }>`
   width: 100%;
   height: 100%;
-  opacity: 0.3;
   ${({ mapImgSrc }) =>
     css`
       background: url(${mapImgSrc});
@@ -40,24 +48,14 @@ const STDLeftMap = styled.div<{ mapImgSrc: string }>`
     `}
 `;
 
-const STDLeftTopImg = styled.img`
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-`;
-
 const STDRoadLogo = styled.div<{ roadImgSrc: string }>`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 300px;
-  height: 300px;
-  margin: -150px 0 0 -150px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   ${({ roadImgSrc }) => css`
     background: url(${roadImgSrc});
-    background-size: cover;
+    background-size: contain;
   `}
 `;

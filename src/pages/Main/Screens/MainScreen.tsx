@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { modalToggle } from "modules/store";
+import { device } from "styles/theme";
+import mixin from "styles/mixin";
 
 type Images = {
   id: string;
-  normal: string;
-  hover: string;
+  imgSrc: string;
 };
 
 interface IProp {
@@ -32,40 +33,60 @@ export const MainScreen: React.FC<IProp> = ({
   };
 
   return (
-    <STDMapContainer>
-      {images.map((item, idx) => {
-        const { id, normal, hover } = item;
-
-        return (
-          <STDHouse
+    <STDContainer>
+      <STDMapContainer>
+        {images.map(({ id, imgSrc }, idx) => (
+          <STDStore
             key={id}
-            src={hoveredAt === id ? hover : normal}
-            idx={idx}
+            src={imgSrc}
+            id={id}
+            hoveredAt={hoveredAt}
             onClick={() => changeClickedAndModal(id, idx)}
             onMouseEnter={() => setHoveredAt(id)}
             onMouseLeave={() => setHoveredAt(null)}
           />
-        );
-      })}
-    </STDMapContainer>
+        ))}
+      </STDMapContainer>
+    </STDContainer>
   );
 };
 
-const MAP_HEIGHT = window.innerHeight;
+const MAP_LENGTH = {
+  width: 1920,
+  height: 1080,
+};
+
+const STDContainer = styled.div`
+  ${mixin.flexSet()}
+  height: 100vh;
+  width: 100%;
+`;
 
 const STDMapContainer = styled.div`
   display: flex;
-  width: ${MAP_HEIGHT}px;
-  height: ${MAP_HEIGHT}px;
-  margin: 0 auto;
+  justify-content: space-between;
   position: relative;
-  background-image: url("/Images/road.png");
+  width: ${MAP_LENGTH.width * 0.4}px;
+  height: ${MAP_LENGTH.height * 0.4}px;
+  background-image: url("/Images/mainMap.jpg");
+  background-size: cover;
   background-position: center;
+
+  @media ${device.laptopL} {
+    width: ${MAP_LENGTH.width * 0.6}px;
+    height: ${MAP_LENGTH.height * 0.6}px;
+  }
+
+  @media ${device.desktopL} {
+    width: ${MAP_LENGTH.width}px;
+    height: ${MAP_LENGTH.height}px;
+  }
 `;
 
-const STDHouse = styled.img`
+const STDStore = styled.img<{ hoveredAt: string | null; id: string }>`
   width: 200px;
   height: 200px;
-  margin-top: ${({ idx }: { idx: number }) => `${200 - 100 * idx}px`};
+  transition: opacity 500;
   cursor: pointer;
+  ${({ hoveredAt, id }) => hoveredAt === id && `opacity: 0.5`}
 `;
