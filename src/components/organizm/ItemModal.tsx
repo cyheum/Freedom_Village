@@ -1,24 +1,49 @@
+import LeftDetailContainer from "components/molecular/LeftDetailContainer";
+import RightDetailContainer from "components/molecular/RightDetailContainer";
 import React from "react";
 import styled from "styled-components";
 
-interface IProps {
-  activeModal: string | null;
+interface IProp {
+  mapImgSrc: string;
+  roadImgSrc: string;
+  leftTopImgSrc: string;
+  rightTopImgSrc: string;
+  rightBottomImgSrc: string;
+  storeLogoScr: string;
 }
 
-export const ItemModal: React.FC<IProps> = ({ activeModal }) => {
+export const ItemModal: React.FC<IProp> = ({
+  mapImgSrc,
+  roadImgSrc,
+  leftTopImgSrc,
+  rightTopImgSrc,
+  rightBottomImgSrc,
+  storeLogoScr,
+}) => {
   return (
-    <Modal onClick={(e) => e.stopPropagation()}>I m modal{activeModal}!</Modal>
+    <STDModal>
+      <LeftDetailContainer
+        mapImgSrc={mapImgSrc}
+        roadImgSrc={roadImgSrc}
+        leftTopImgSrc={leftTopImgSrc}
+      />
+      <RightDetailContainer
+        storeLogoScr={storeLogoScr}
+        rightTopImgSrc={rightTopImgSrc}
+        rightBottomImgSrc={rightBottomImgSrc}
+      />
+    </STDModal>
   );
 };
 
-const Modal = styled.div`
+const STDModal = styled.div`
+  position: absolute;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 500px;
-  height: 60vh;
+  width: 1000px;
+  height: 80vh;
   border: 1px solid black;
   border-radius: 20px;
   box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.1);
   background: white;
+  overflow: hidden;
 `;

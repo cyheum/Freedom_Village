@@ -10,20 +10,32 @@ export const ModalScreen = () => {
   const dispatch = useDispatch();
 
   return (
-    <Container onClick={() => dispatch(modalToggle(null))}>
-      <ItemModal activeModal={activeModal} />
-    </Container>
+    <STDContainer>
+      <STDemtpty onClick={() => dispatch(modalToggle(null))} />
+      <ItemModal
+        mapImgSrc={"/Images/leftMap.jpg"}
+        leftTopImgSrc={"Images/leftTop.png"}
+        roadImgSrc={"Images/tempRoad.png"}
+        rightTopImgSrc={"Images/rightTopBack.png"}
+        rightBottomImgSrc={"Images/rightBottomBack.png"}
+        storeLogoScr={"Images/rightTopLogo.png"}
+      />
+    </STDContainer>
   );
 };
 
-const Container = styled.div`
+const STDContainer = styled.div`
   position: fixed;
   top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  z-index: 10000;
+`;
+
+const STDemtpty = styled.div`
+  width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 10000;
 `;

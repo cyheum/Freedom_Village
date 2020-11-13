@@ -32,12 +32,12 @@ export const MainScreen: React.FC<IProp> = ({
   };
 
   return (
-    <MapContainer>
+    <STDMapContainer>
       {images.map((item, idx) => {
         const { id, normal, hover } = item;
 
         return (
-          <House
+          <STDHouse
             key={id}
             src={hoveredAt === id ? hover : normal}
             idx={idx}
@@ -47,14 +47,13 @@ export const MainScreen: React.FC<IProp> = ({
           />
         );
       })}
-      <Human src="/Images/human.png" idx={clickedAt} />
-    </MapContainer>
+    </STDMapContainer>
   );
 };
 
 const MAP_HEIGHT = window.innerHeight;
 
-const MapContainer = styled.div`
+const STDMapContainer = styled.div`
   display: flex;
   width: ${MAP_HEIGHT}px;
   height: ${MAP_HEIGHT}px;
@@ -64,22 +63,9 @@ const MapContainer = styled.div`
   background-position: center;
 `;
 
-const House = styled.img`
-  width: 250px;
-  height: 250px;
-  margin-top: ${({ idx }: { idx: number }) => `${300 - 140 * idx}px`};
+const STDHouse = styled.img`
+  width: 200px;
+  height: 200px;
+  margin-top: ${({ idx }: { idx: number }) => `${200 - 100 * idx}px`};
   cursor: pointer;
-`;
-
-const Human = styled.img`
-  width: 70px;
-  height: 70px;
-  position: absolute;
-  right: 200px;
-  top: 180px;
-  transform: translate(
-    -${({ idx }: { idx: number }) => (3 - idx) * 180}px,
-    ${({ idx }: { idx: number }) => (3 - idx) * 110}px
-  );
-  transition: transform 1s ease-out;
 `;
