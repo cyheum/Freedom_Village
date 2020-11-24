@@ -5,13 +5,25 @@ import { device } from "styles/theme";
 interface IProp {
   mapImgSrc: string;
   roadImgSrc: string;
+  isLeftClicked: boolean;
+  leftClickToggle: (bool: boolean) => void;
 }
 
-const LeftDetailContainer: React.FC<IProp> = ({ mapImgSrc, roadImgSrc }) => {
+const LeftDetailContainer: React.FC<IProp> = ({
+  mapImgSrc,
+  roadImgSrc,
+  isLeftClicked,
+  leftClickToggle,
+}) => {
   return (
     <STDContainer>
       <STDLeftMap mapImgSrc={mapImgSrc} />
-      <STDRoadLogo roadImgSrc={roadImgSrc} />
+      {!isLeftClicked && (
+        <STDRoadLogo
+          roadImgSrc={roadImgSrc}
+          onClick={() => leftClickToggle(true)}
+        />
+      )}
     </STDContainer>
   );
 };
@@ -32,6 +44,7 @@ const STDContainer = styled.div`
     width: ${FIXED_VAL.width * 0.6}px;
     height: ${FIXED_VAL.height * 0.6}px;
   }
+
   @media ${device.desktopL} {
     width: ${FIXED_VAL.width}px;
     height: ${FIXED_VAL.height}px;

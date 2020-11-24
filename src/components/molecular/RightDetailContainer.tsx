@@ -17,6 +17,8 @@ interface IProp {
   emptyBlur: string;
   rightTopData: IData[];
   rightBottomData: IData[];
+  isRightClicked: boolean;
+  rightClickToggle: (bool: boolean) => void;
 }
 
 const RightDetailContainer: React.FC<IProp> = ({
@@ -26,13 +28,13 @@ const RightDetailContainer: React.FC<IProp> = ({
   emptyBlur,
   rightTopData,
   rightBottomData,
+  isRightClicked,
+  rightClickToggle,
 }) => {
-  console.log(rightTopData, rightBottomData);
-
   return (
-    <STDContainer>
+    <STDContainer onClick={() => rightClickToggle(true)}>
       <STDTopContainer>
-        <STDStoreLogo src={storeLogoScr} alt="storeLogo" />
+        {!isRightClicked && <STDStoreLogo src={storeLogoScr} alt="storeLogo" />}
         <STDTopImgContainer
           alt="storeImg2"
           src={rightTopImgSrc}
@@ -54,7 +56,7 @@ const RightDetailContainer: React.FC<IProp> = ({
         )}
       </STDIconsContainer>
       <STDBottomContainer>
-        <STDBlurBox emptyBlur={emptyBlur} />
+        {!isRightClicked && <STDBlurBox emptyBlur={emptyBlur} />}
         <STDBottomImgContainer
           alt="storeImg2"
           src={rightBottomImgSrc}

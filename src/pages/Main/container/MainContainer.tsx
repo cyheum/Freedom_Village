@@ -5,35 +5,88 @@ import { useGetActiveModal } from "hooks";
 
 export const MainContainer = () => {
   const [hoveredAt, setHoveredAt] = useState<string | null>(null);
-  const [clickedAt, setClickedAt] = useState<number>(3);
+  const [isLeftClicked, setIsLeftClicked] = useState(false);
+  const [isRightClicked, setIsRightClicked] = useState(false);
   const activeModal = useGetActiveModal();
+
+  const leftClickToggle = (bool: boolean) => {
+    setIsLeftClicked(bool);
+  };
+
+  const rightClickToggle = (bool: boolean) => {
+    setIsRightClicked(bool);
+  };
 
   return (
     <>
       <MainScreen
-        images={IMAGE_DATA}
+        mainData={MAIN_DATA}
         hoveredAt={hoveredAt}
-        clickedAt={clickedAt}
         setHoveredAt={setHoveredAt}
-        setClickedAt={setClickedAt}
       />
-      {activeModal !== null && <ModalScreen rightData={RIGHTDATA} />}
+      {activeModal !== null && (
+        <ModalScreen
+          rightData={RIGHTDATA}
+          isLeftClicked={isLeftClicked}
+          isRightClicked={isRightClicked}
+          leftClickToggle={leftClickToggle}
+          rightClickToggle={rightClickToggle}
+        />
+      )}
     </>
   );
 };
 
-const IMAGE_DATA = [
+const MAIN_DATA = [
   {
-    id: "1",
-    imgSrc: "/Images/house_normal1.png",
+    marginTop: 236,
+    descriptionImgData: [
+      {
+        id: "1",
+        imgSrc: "/Images/hoho.png",
+      },
+      {
+        id: "2",
+        imgSrc: "/Images/pianoForest.png",
+      },
+      {
+        id: "3",
+        imgSrc: "/Images/PM.png",
+      },
+      {
+        id: "4",
+        imgSrc: "/Images/inTheBegining.png",
+      },
+      {
+        id: "5",
+        imgSrc: "/Images/karaban.png",
+      },
+    ],
   },
   {
-    id: "2",
-    imgSrc: "/Images/house_normal2.png",
-  },
-  {
-    id: "3",
-    imgSrc: "/Images/house_normal3.png",
+    marginTop: 90,
+    descriptionImgData: [
+      {
+        id: "6",
+        imgSrc: "/Images/nangman.png",
+      },
+      {
+        id: "7",
+        imgSrc: "/Images/seoulSoul.png",
+      },
+      {
+        id: "8",
+        imgSrc: "/Images/hPlay.png",
+      },
+      {
+        id: "9",
+        imgSrc: "/Images/konOnPlate.png",
+      },
+      {
+        id: "10",
+        imgSrc: "/Images/noni.png",
+      },
+    ],
   },
 ];
 
