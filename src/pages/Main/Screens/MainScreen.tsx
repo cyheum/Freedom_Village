@@ -4,46 +4,46 @@ import { useDispatch } from "react-redux";
 import { modalToggle } from "modules/store";
 import { device } from "styles/theme";
 import mixin from "styles/mixin";
+import { MainDescriptionContainer } from "components";
 
-type Images = {
+interface IDescriptionData {
   id: string;
   imgSrc: string;
-};
+}
+
+interface IData {
+  marginTop: number;
+  descriptionImgData: IDescriptionData[];
+}
 
 interface IProp {
-  images: Images[];
+  mainData: IData[];
   hoveredAt: string | null;
-  clickedAt: number;
   setHoveredAt: (id: string | null) => void;
-  setClickedAt: (idx: number) => void;
 }
 
 export const MainScreen: React.FC<IProp> = ({
-  images,
+  mainData,
   hoveredAt,
-  clickedAt,
   setHoveredAt,
-  setClickedAt,
 }) => {
   const dispatch = useDispatch();
 
-  const changeClickedAndModal = (id: string, idx: number) => {
+  const changeActiveModal = (id: string | null) => {
     dispatch(modalToggle(id));
-    setClickedAt(idx);
   };
 
   return (
     <STDContainer>
       <STDMapContainer>
-        {images.map(({ id, imgSrc }, idx) => (
-          <STDStore
-            key={id}
-            src={imgSrc}
-            id={id}
+        {mainData.map(({ marginTop, descriptionImgData }, index) => (
+          <MainDescriptionContainer
+            key={index}
             hoveredAt={hoveredAt}
-            onClick={() => changeClickedAndModal(id, idx)}
-            onMouseEnter={() => setHoveredAt(id)}
-            onMouseLeave={() => setHoveredAt(null)}
+            marginTop={marginTop}
+            descriptionImgData={descriptionImgData}
+            changeActiveModal={changeActiveModal}
+            setHoveredAt={setHoveredAt}
           />
         ))}
       </STDMapContainer>
@@ -68,6 +68,8 @@ const STDMapContainer = styled.div`
   position: relative;
   width: ${MAP_LENGTH.width * 0.4}px;
   height: ${MAP_LENGTH.height * 0.4}px;
+  padding-left: ${46 * 0.4}px;
+  padding-right: ${46 * 0.4}px;
   background-image: url("/Images/mainMap.jpg");
   background-size: cover;
   background-position: center;
@@ -75,18 +77,14 @@ const STDMapContainer = styled.div`
   @media ${device.laptopL} {
     width: ${MAP_LENGTH.width * 0.6}px;
     height: ${MAP_LENGTH.height * 0.6}px;
+    padding-left: ${46 * 0.6}px;
+    padding-right: ${46 * 0.6}px;
   }
 
   @media ${device.desktopL} {
     width: ${MAP_LENGTH.width}px;
     height: ${MAP_LENGTH.height}px;
+    padding-left: 46px;
+    padding-right: 46px;
   }
-`;
-
-const STDStore = styled.img<{ hoveredAt: string | null; id: string }>`
-  width: 200px;
-  height: 200px;
-  transition: opacity 500;
-  cursor: pointer;
-  ${({ hoveredAt, id }) => hoveredAt === id && `opacity: 0.5`}
 `;

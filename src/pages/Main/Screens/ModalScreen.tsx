@@ -18,9 +18,19 @@ interface IProp {
     rightTopData: IData[];
     rightBottomData: IData[];
   };
+  isLeftClicked: boolean;
+  isRightClicked: boolean;
+  leftClickToggle: (bool: boolean) => void;
+  rightClickToggle: (bool: boolean) => void;
 }
 
-export const ModalScreen: React.FC<IProp> = ({ rightData }) => {
+export const ModalScreen: React.FC<IProp> = ({
+  rightData,
+  isLeftClicked,
+  isRightClicked,
+  leftClickToggle,
+  rightClickToggle,
+}) => {
   const activeModal = useGetActiveModal();
   const dispatch = useDispatch();
 
@@ -36,6 +46,10 @@ export const ModalScreen: React.FC<IProp> = ({ rightData }) => {
         emptyBlur={"/Images/emptyBlur.png"}
         rightTopData={rightData.rightTopData}
         rightBottomData={rightData.rightBottomData}
+        isLeftClicked={isLeftClicked}
+        isRightClicked={isRightClicked}
+        leftClickToggle={leftClickToggle}
+        rightClickToggle={rightClickToggle}
       />
     </STDContainer>
   );

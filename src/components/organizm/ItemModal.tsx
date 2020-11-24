@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import LeftDetailContainer from "../molecular/LeftDetailContainer";
 import RightDetailContainer from "../molecular/RightDetailContainer";
@@ -20,6 +20,10 @@ interface IProp {
   emptyBlur: string;
   rightTopData: IData[];
   rightBottomData: IData[];
+  isLeftClicked: boolean;
+  isRightClicked: boolean;
+  leftClickToggle: (bool: boolean) => void;
+  rightClickToggle: (bool: boolean) => void;
 }
 
 export const ItemModal: React.FC<IProp> = ({
@@ -31,10 +35,26 @@ export const ItemModal: React.FC<IProp> = ({
   emptyBlur,
   rightTopData,
   rightBottomData,
+  isLeftClicked,
+  isRightClicked,
+  leftClickToggle,
+  rightClickToggle,
 }) => {
+  useEffect(() => {
+    return () => {
+      leftClickToggle(false);
+      rightClickToggle(false);
+    };
+  }, []);
+
   return (
     <STDModal>
-      <LeftDetailContainer mapImgSrc={mapImgSrc} roadImgSrc={roadImgSrc} />
+      <LeftDetailContainer
+        mapImgSrc={mapImgSrc}
+        roadImgSrc={roadImgSrc}
+        isLeftClicked={isLeftClicked}
+        leftClickToggle={leftClickToggle}
+      />
       <RightDetailContainer
         storeLogoScr={storeLogoScr}
         rightTopImgSrc={rightTopImgSrc}
@@ -42,6 +62,8 @@ export const ItemModal: React.FC<IProp> = ({
         rightBottomImgSrc={rightBottomImgSrc}
         rightBottomData={rightBottomData}
         emptyBlur={emptyBlur}
+        isRightClicked={isRightClicked}
+        rightClickToggle={rightClickToggle}
       />
     </STDModal>
   );
