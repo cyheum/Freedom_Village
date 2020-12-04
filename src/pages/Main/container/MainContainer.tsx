@@ -4,7 +4,6 @@ import { ModalScreen } from "../Screens/ModalScreen";
 import { useGetActiveModal } from "hooks";
 
 export const MainContainer = () => {
-  const [hoveredAt, setHoveredAt] = useState<string | null>(null);
   const [isLeftClicked, setIsLeftClicked] = useState(false);
   const [isRightClicked, setIsRightClicked] = useState(false);
   const activeModal = useGetActiveModal();
@@ -19,11 +18,7 @@ export const MainContainer = () => {
 
   return (
     <>
-      <MainScreen
-        mainData={MAIN_DATA}
-        hoveredAt={hoveredAt}
-        setHoveredAt={setHoveredAt}
-      />
+      <MainScreen mainData={MAIN_DATA} />
       {activeModal !== null && (
         <ModalScreen
           rightData={RIGHTDATA}
@@ -40,51 +35,111 @@ export const MainContainer = () => {
 const MAIN_DATA = [
   {
     marginTop: 236,
-    descriptionImgData: [
+    storeData: [
       {
         id: "1",
-        imgSrc: "/Images/hoho.png",
+        type: "LEFT_TOP_LIST",
+        imgSrc: "/Images/hoho/hoho.png",
+        label: "/Images/hoho/label.png",
+        rightTopImgSrc: "/Images/hoho/img1.png",
+        rightBottomImgSrc: "/Images/hoho/img2.png",
+        positionX: 100,
+        positionY: 245,
       },
       {
         id: "2",
-        imgSrc: "/Images/pianoForest.png",
+        type: "LEFT_TOP_LIST",
+        imgSrc: "/Images/pianoForest/pianoForest.png",
+        label: "/Images/pianoForest/label.png",
+        rightTopImgSrc: "/Images/pianoForest/img1.png",
+        rightBottomImgSrc: "/Images/pianoForest/img2.png",
+        positionX: 100,
+        positionY: 365,
       },
       {
         id: "3",
-        imgSrc: "/Images/PM.png",
+        type: "LEFT_TOP_LIST",
+        imgSrc: "/Images/PM/PM.png",
+        label: "/Images/PM/label.png",
+        rightTopImgSrc: "/Images/PM/img1.png",
+        rightBottomImgSrc: "/Images/PM/img2.png",
+        positionX: 100,
+        positionY: 438,
       },
       {
         id: "4",
-        imgSrc: "/Images/inTheBegining.png",
+        type: "LEFT_BOTTOM_LIST",
+        imgSrc: "/Images/inTheBegining/inTheBegining.png",
+        label: "/Images/inTheBegining/label.png",
+        rightTopImgSrc: "/Images/inTheBegining/img1.png",
+        rightBottomImgSrc: "/Images/inTheBegining/img2.png",
+        positionX: 595,
+        positionY: 423,
       },
       {
         id: "5",
-        imgSrc: "/Images/karaban.png",
+        type: "LEFT_BOTTOM_LIST",
+        imgSrc: "/Images/karaban/karaban.png",
+        label: "/Images/karaban/label.png",
+        rightTopImgSrc: "/Images/karaban/img1.png",
+        rightBottomImgSrc: "/Images/karaban/img2.png",
+        positionX: 421,
+        positionY: 225,
       },
     ],
   },
   {
     marginTop: 90,
-    descriptionImgData: [
+    storeData: [
       {
         id: "6",
-        imgSrc: "/Images/nangman.png",
+        type: "LEFT_BOTTOM_LIST",
+        imgSrc: "/Images/nangman/nangman.png",
+        label: "/Images/nangman/label.png",
+        rightTopImgSrc: "/Images/nangman/img1.png",
+        rightBottomImgSrc: "/Images/nangman/img2.png",
+        positionX: 421,
+        positionY: 156,
       },
       {
         id: "7",
-        imgSrc: "/Images/seoulSoul.png",
+        type: "RIGHT_LIST",
+        imgSrc: "/Images/seoulSoul/seoulSoul.png",
+        label: "/Images/seoulSoul/label.png",
+        rightTopImgSrc: "/Images/seoulSoul/img1.png",
+        rightBottomImgSrc: "/Images/seoulSoul/img2.png",
+        positionX: 500,
+        positionY: 583,
       },
       {
         id: "8",
-        imgSrc: "/Images/hPlay.png",
+        type: "RIGHT_LIST",
+        imgSrc: "/Images/hPlay/hPlay.png",
+        label: "/Images/hPlay/label.png",
+        rightTopImgSrc: "/Images/hPlay/img1.png",
+        rightBottomImgSrc: "/Images/hPlay/img2.png",
+        positionX: 140,
+        positionY: 637,
       },
       {
         id: "9",
-        imgSrc: "/Images/konOnPlate.png",
+        type: "RIGHT_LIST",
+        imgSrc: "/Images/konOnPlate/konOnPlate.png",
+        label: "/Images/konOnPlate/label.png",
+        rightTopImgSrc: "/Images/konOnPlate/img1.png",
+        rightBottomImgSrc: "/Images/konOnPlate/img2.png",
+        positionX: 140,
+        positionY: 525,
       },
       {
         id: "10",
-        imgSrc: "/Images/noni.png",
+        type: "RIGHT_LIST",
+        imgSrc: "/Images/noni/noni.png",
+        label: "/Images/noni/label.png",
+        rightTopImgSrc: "/Images/noni/img1.png",
+        rightBottomImgSrc: "/Images/noni/img2.png",
+        positionX: 60,
+        positionY: 388,
       },
     ],
   },

@@ -13,8 +13,8 @@ interface IData {
 interface IProp {
   rightTopImgSrc: string;
   rightBottomImgSrc: string;
-  storeLogoScr: string;
-  emptyBlur: string;
+  topEmptyBlur: string;
+  bottomEmptyBlur: string;
   rightTopData: IData[];
   rightBottomData: IData[];
   isRightClicked: boolean;
@@ -24,8 +24,8 @@ interface IProp {
 const RightDetailContainer: React.FC<IProp> = ({
   rightTopImgSrc,
   rightBottomImgSrc,
-  storeLogoScr,
-  emptyBlur,
+  topEmptyBlur,
+  bottomEmptyBlur,
   rightTopData,
   rightBottomData,
   isRightClicked,
@@ -34,7 +34,9 @@ const RightDetailContainer: React.FC<IProp> = ({
   return (
     <STDContainer onClick={() => rightClickToggle(true)}>
       <STDTopContainer>
-        {!isRightClicked && <STDStoreLogo src={storeLogoScr} alt="storeLogo" />}
+        {!isRightClicked && (
+          <STDTopBlurBox src={topEmptyBlur} alt="storeLogo" />
+        )}
         <STDTopImgContainer
           alt="storeImg2"
           src={rightTopImgSrc}
@@ -56,7 +58,7 @@ const RightDetailContainer: React.FC<IProp> = ({
         )}
       </STDIconsContainer>
       <STDBottomContainer>
-        {!isRightClicked && <STDBlurBox emptyBlur={emptyBlur} />}
+        {!isRightClicked && <STDBottomBlurBox emptyBlur={bottomEmptyBlur} />}
         <STDBottomImgContainer
           alt="storeImg2"
           src={rightBottomImgSrc}
@@ -142,7 +144,7 @@ const STDBottomContainer = styled.div`
   }
 `;
 
-const STDStoreLogo = styled.img`
+const STDTopBlurBox = styled.img`
   position: absolute;
   top: 0;
   left: 0;
@@ -156,7 +158,7 @@ const STDTopImgContainer = styled.img`
   object-fit: cover;
 `;
 
-const STDBlurBox = styled.div<{ emptyBlur: string }>`
+const STDBottomBlurBox = styled.div<{ emptyBlur: string }>`
   position: absolute;
   top: 0;
   left: 0;

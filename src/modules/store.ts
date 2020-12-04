@@ -1,11 +1,11 @@
-import { GetData, ModalToggle, IStoreState } from "./store.interface";
+import { GetData, ModalToggle, IStoreData } from "./store.interface";
 
 export const GET_DATA = "GET_DATA";
 export const MODAL_TOGGLE = "MODAL_TOGGLE";
 
 type contentAction = GetData | ModalToggle;
 
-export const getData = (data: IStoreState) => ({
+export const getData = (data: IStoreData) => ({
   type: GET_DATA,
   payload: data,
 });
@@ -16,7 +16,7 @@ export const modalToggle = (id: string | null) => ({
 });
 
 const INITIAL_STATE = {
-  data: [],
+  currentData: [],
   activeModal: null,
 };
 
@@ -28,7 +28,7 @@ export default function mainStore(
     case GET_DATA:
       return {
         ...state,
-        data: action.payload,
+        currentData: action.payload,
       };
     case MODAL_TOGGLE:
       return {

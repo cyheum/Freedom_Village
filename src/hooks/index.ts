@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { IStore } from "modules/store.interface";
 
 export const useGetData = () => {
-  const data = useSelector(({ mainStore: { data } }: IStore) => data);
-  return data;
+  const { currentData } = useSelector(({ mainStore }: IStore) => mainStore);
+  return currentData;
 };
 
 export const useGetActiveModal = () => {
