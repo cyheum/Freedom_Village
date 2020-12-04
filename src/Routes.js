@@ -8,6 +8,7 @@ class Routes extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={MainContainer} />
+          <Route exact path="/:id" component={MainContainer} />
         </Switch>
       </Router>
     );

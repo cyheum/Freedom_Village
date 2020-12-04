@@ -1,45 +1,42 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { device } from "styles/theme";
+import { IStoreData } from "modules";
 import StoreMainDescription from "../atomic/StoreMainDescription";
-
-interface IData {
-  id: string;
-  imgSrc: string;
-}
 
 interface IContainerProp {
   marginTop: number;
 }
 
 interface IProp extends IContainerProp {
-  hoveredAt: string | null;
-  descriptionImgData: IData[];
+  currentStoreData: IStoreData[];
   changeActiveModal: (id: string | null) => void;
-  setHoveredAt: (id: string | null) => void;
+  onClickSetCurrentStoreData: (data: IStoreData) => void;
 }
 
 export const MainDescriptionContainer: React.FC<IProp> = ({
-  hoveredAt,
   marginTop,
-  descriptionImgData,
+  currentStoreData,
   changeActiveModal,
-  setHoveredAt,
+  onClickSetCurrentStoreData,
 }) => {
   return (
     <STDContainer marginTop={marginTop}>
-      {descriptionImgData.map(({ id, imgSrc }) => (
-        <StoreMainDescription
-          key={id}
-          id={id}
-          width={360}
-          height={146}
-          descriptionImgSrc={imgSrc}
-          hoveredAt={hoveredAt}
-          setHoveredAt={setHoveredAt}
-          changeActiveModal={changeActiveModal}
-        />
-      ))}
+      {currentStoreData.map((storeData) => {
+        const { id, imgSrc } = storeData;
+
+        return (
+          <StoreMainDescription
+            key={id}
+            id={id}
+            width={360}
+            height={146}
+            descriptionImgSrc={imgSrc}
+            changeActiveModal={changeActiveModal}
+            onClickSetData={() => onClickSetCurrentStoreData(storeData)}
+          />
+        );
+      })}
     </STDContainer>
   );
 };

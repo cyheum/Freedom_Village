@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import LeftDetailContainer from "../molecular/LeftDetailContainer";
 import RightDetailContainer from "../molecular/RightDetailContainer";
-import { device } from "styles/theme";
+import mixin from "styles/mixin";
 
 interface IData {
   iconSrc: string;
@@ -12,12 +12,16 @@ interface IData {
 }
 
 interface IProp {
+  type: string;
+  labelSrc: string;
+  positionX: number;
+  positionY: number;
   mapImgSrc: string;
   roadImgSrc: string;
   rightTopImgSrc: string;
   rightBottomImgSrc: string;
-  storeLogoScr: string;
-  emptyBlur: string;
+  topEmptyBlur: string;
+  bottomEmptyBlur: string;
   rightTopData: IData[];
   rightBottomData: IData[];
   isLeftClicked: boolean;
@@ -27,12 +31,16 @@ interface IProp {
 }
 
 export const ItemModal: React.FC<IProp> = ({
+  type,
+  labelSrc,
+  positionX,
+  positionY,
   mapImgSrc,
   roadImgSrc,
   rightTopImgSrc,
   rightBottomImgSrc,
-  storeLogoScr,
-  emptyBlur,
+  topEmptyBlur,
+  bottomEmptyBlur,
   rightTopData,
   rightBottomData,
   isLeftClicked,
@@ -50,18 +58,22 @@ export const ItemModal: React.FC<IProp> = ({
   return (
     <STDModal>
       <LeftDetailContainer
+        type={type}
+        labelSrc={labelSrc}
+        positionX={positionX}
+        positionY={positionY}
         mapImgSrc={mapImgSrc}
         roadImgSrc={roadImgSrc}
         isLeftClicked={isLeftClicked}
         leftClickToggle={leftClickToggle}
       />
       <RightDetailContainer
-        storeLogoScr={storeLogoScr}
+        topEmptyBlur={topEmptyBlur}
         rightTopImgSrc={rightTopImgSrc}
         rightTopData={rightTopData}
         rightBottomImgSrc={rightBottomImgSrc}
         rightBottomData={rightBottomData}
-        emptyBlur={emptyBlur}
+        bottomEmptyBlur={bottomEmptyBlur}
         isRightClicked={isRightClicked}
         rightClickToggle={rightClickToggle}
       />
@@ -77,21 +89,10 @@ const FIXED_VAL = {
 const STDModal = styled.div`
   position: absolute;
   display: flex;
-  width: ${FIXED_VAL.width * 0.4}px;
-  height: ${FIXED_VAL.height * 0.4}px;
   border: 1px solid black;
   border-radius: 20px;
   box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.1);
   background: white;
   overflow: hidden;
-
-  @media ${device.laptopL} {
-    width: ${FIXED_VAL.width * 0.6}px;
-    height: ${FIXED_VAL.height * 0.6}px;
-  }
-
-  @media ${device.desktopL} {
-    width: ${FIXED_VAL.width}px;
-    height: ${FIXED_VAL.height}px;
-  }
+  ${mixin.dynamicScreen(FIXED_VAL.width, FIXED_VAL.height)}
 `;

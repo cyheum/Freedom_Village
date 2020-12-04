@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { ItemModal } from "components";
 import { useDispatch } from "react-redux";
-import { modalToggle } from "modules/store";
-import { useGetActiveModal } from "hooks";
+import { modalToggle } from "modules";
+import { useGetData } from "hooks";
 import mixin from "styles/mixin";
 
 interface IData {
@@ -31,19 +31,35 @@ export const ModalScreen: React.FC<IProp> = ({
   leftClickToggle,
   rightClickToggle,
 }) => {
-  const activeModal = useGetActiveModal();
+  const currentData = useGetData();
   const dispatch = useDispatch();
-
+  const {
+    type,
+    label,
+    rightTopImgSrc,
+    rightBottomImgSrc,
+    positionY,
+    positionX,
+  } = currentData;
   return (
     <STDContainer>
       <STDemtpty onClick={() => dispatch(modalToggle(null))} />
       <ItemModal
-        mapImgSrc={"/Images/detailMap.png"}
+        mapImgSrc={`/Images/${
+          currentData.type === "LEFT_TOP_LIST" ||
+          currentData.type === "LEFT_BOTTOM_LIST"
+            ? "leftMap2"
+            : "leftMap1"
+        }.png`}
+        type={type}
+        labelSrc={label}
+        positionX={positionX}
+        positionY={positionY}
         roadImgSrc={"/Images/streetLogo.png"}
-        rightTopImgSrc={"/Images/storeImg3.png"}
-        rightBottomImgSrc={"/Images/storeImg2.png"}
-        storeLogoScr={"/Images/storeLogo.png"}
-        emptyBlur={"/Images/emptyBlur.png"}
+        rightTopImgSrc={rightTopImgSrc}
+        rightBottomImgSrc={rightBottomImgSrc}
+        topEmptyBlur={"/Images/emptyBlur1.png"}
+        bottomEmptyBlur={"/Images/emptyBlur2.png"}
         rightTopData={rightData.rightTopData}
         rightBottomData={rightData.rightBottomData}
         isLeftClicked={isLeftClicked}

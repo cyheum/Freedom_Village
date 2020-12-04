@@ -1,7 +1,18 @@
 import { GET_DATA, MODAL_TOGGLE } from "./store";
 
+export interface IStoreData {
+  id: string;
+  type: string;
+  imgSrc: string;
+  label: string;
+  rightTopImgSrc: string;
+  rightBottomImgSrc: string;
+  positionX: number;
+  positionY: number;
+}
+
 export interface IStoreState {
-  data: any;
+  currentData: IStoreData;
   activeModal: string | null;
 }
 
