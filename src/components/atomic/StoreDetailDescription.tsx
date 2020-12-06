@@ -41,14 +41,12 @@ const STDDescription = styled.div<IDescriptionSize>`
       width: ${textWidth * 0.4}px;
       height: ${textHeight * 0.4}px;
       font-size: ${20 * 0.4 * 0.8}px;
-      padding: ${15 * 0.4 * 0.8}px;
-      -webkit-transform: scale(0.83);
+      -webkit-transform: scale(0.63);
 
       @media ${device.laptopL} {
         width: ${textWidth * 0.6}px;
         height: ${textHeight * 0.6}px;
         font-size: ${20 * 0.6 * 0.8}px;
-        padding: ${15 * 0.6 * 0.8}px;
         -webkit-transform: scale(0.83);
       }
 
