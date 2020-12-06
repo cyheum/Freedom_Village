@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import LeftDetailContainer from "../molecular/LeftDetailContainer";
 import RightDetailContainer from "../molecular/RightDetailContainer";
@@ -26,8 +26,11 @@ interface IProp {
   rightBottomData: IData[];
   isLeftClicked: boolean;
   isRightClicked: boolean;
+  isFadeoutOn: boolean;
   leftClickToggle: (bool: boolean) => void;
   rightClickToggle: (bool: boolean) => void;
+  onClickFadeout: () => void;
+  onClickSetFadeout: (bool: boolean) => void;
 }
 
 export const ItemModal: React.FC<IProp> = ({
@@ -45,16 +48,11 @@ export const ItemModal: React.FC<IProp> = ({
   rightBottomData,
   isLeftClicked,
   isRightClicked,
+  isFadeoutOn,
   leftClickToggle,
   rightClickToggle,
+  onClickSetFadeout,
 }) => {
-  useEffect(() => {
-    return () => {
-      leftClickToggle(false);
-      rightClickToggle(false);
-    };
-  }, []);
-
   return (
     <STDModal>
       <LeftDetailContainer
@@ -65,7 +63,11 @@ export const ItemModal: React.FC<IProp> = ({
         mapImgSrc={mapImgSrc}
         roadImgSrc={roadImgSrc}
         isLeftClicked={isLeftClicked}
-        leftClickToggle={leftClickToggle}
+        isFadeoutOn={isFadeoutOn}
+        onClickSetFadeout={() => {
+          onClickSetFadeout(true);
+          setTimeout(() => leftClickToggle(true), 1200);
+        }}
       />
       <RightDetailContainer
         topEmptyBlur={topEmptyBlur}
@@ -82,8 +84,8 @@ export const ItemModal: React.FC<IProp> = ({
 };
 
 const FIXED_VAL = {
-  width: 1920,
-  height: 1080,
+  width: 1920 * 0.8,
+  height: 1080 * 0.8,
 };
 
 const STDModal = styled.div`

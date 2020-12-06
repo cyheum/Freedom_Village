@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { ItemModal } from "components";
 import { useDispatch } from "react-redux";
@@ -20,16 +20,22 @@ interface IProp {
   };
   isLeftClicked: boolean;
   isRightClicked: boolean;
+  isFadeoutOn: boolean;
   leftClickToggle: (bool: boolean) => void;
   rightClickToggle: (bool: boolean) => void;
+  onClickFadeout: () => void;
+  onClickSetFadeout: (bool: boolean) => void;
 }
 
 export const ModalScreen: React.FC<IProp> = ({
   rightData,
   isLeftClicked,
   isRightClicked,
+  isFadeoutOn,
   leftClickToggle,
   rightClickToggle,
+  onClickFadeout,
+  onClickSetFadeout,
 }) => {
   const currentData = useGetData();
   const dispatch = useDispatch();
@@ -41,6 +47,15 @@ export const ModalScreen: React.FC<IProp> = ({
     positionY,
     positionX,
   } = currentData;
+
+  useEffect(() => {
+    return () => {
+      leftClickToggle(false);
+      rightClickToggle(false);
+      onClickSetFadeout(false);
+    };
+  }, []);
+
   return (
     <STDContainer>
       <STDemtpty onClick={() => dispatch(modalToggle(null))} />
@@ -64,8 +79,11 @@ export const ModalScreen: React.FC<IProp> = ({
         rightBottomData={rightData.rightBottomData}
         isLeftClicked={isLeftClicked}
         isRightClicked={isRightClicked}
+        isFadeoutOn={isFadeoutOn}
         leftClickToggle={leftClickToggle}
         rightClickToggle={rightClickToggle}
+        onClickFadeout={onClickFadeout}
+        onClickSetFadeout={onClickSetFadeout}
       />
     </STDContainer>
   );
