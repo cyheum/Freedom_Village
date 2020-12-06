@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import mixin from "styles/mixin";
 import { device } from "styles/theme";
 
@@ -14,7 +14,8 @@ interface IProp extends ILabel {
   mapImgSrc: string;
   roadImgSrc: string;
   isLeftClicked: boolean;
-  leftClickToggle: (bool: boolean) => void;
+  isFadeoutOn: boolean;
+  onClickSetFadeout: () => void;
 }
 
 const LeftDetailContainer: React.FC<IProp> = ({
@@ -25,7 +26,8 @@ const LeftDetailContainer: React.FC<IProp> = ({
   mapImgSrc,
   roadImgSrc,
   isLeftClicked,
-  leftClickToggle,
+  isFadeoutOn,
+  onClickSetFadeout,
 }) => {
   return (
     <STDContainer>
@@ -40,7 +42,8 @@ const LeftDetailContainer: React.FC<IProp> = ({
       {!isLeftClicked && (
         <STDRoadLogo
           roadImgSrc={roadImgSrc}
-          onClick={() => leftClickToggle(true)}
+          isFadeoutOn={isFadeoutOn}
+          onClick={() => onClickSetFadeout()}
         />
       )}
     </STDContainer>
@@ -49,14 +52,24 @@ const LeftDetailContainer: React.FC<IProp> = ({
 
 export default LeftDetailContainer;
 
+const fadeout = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+`;
+
 const FIXED_VAL = {
   container: {
-    width: 1200,
-    height: 1080,
+    width: 1200 * 0.8,
+    height: 1080 * 0.8,
   },
   label: {
-    width: 165,
-    height: 45,
+    width: 165 * 0.8,
+    height: 45 * 0.8,
   },
 };
 
@@ -75,7 +88,7 @@ const STDLeftMap = styled.div<{ mapImgSrc: string }>`
     `}
 `;
 
-const STDRoadLogo = styled.div<{ roadImgSrc: string }>`
+const STDRoadLogo = styled.div<{ roadImgSrc: string; isFadeoutOn: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -86,6 +99,11 @@ const STDRoadLogo = styled.div<{ roadImgSrc: string }>`
     background: url(${roadImgSrc});
     background-size: contain;
   `}
+  ${({ isFadeoutOn }) =>
+    isFadeoutOn &&
+    css`
+      animation: ${fadeout} 1200ms linear normal forwards;
+    `}
 `;
 
 const STDLabel = styled.img<ILabel>`

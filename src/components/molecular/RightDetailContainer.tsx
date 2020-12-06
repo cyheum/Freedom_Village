@@ -86,26 +86,27 @@ const RightDetailContainer: React.FC<IProp> = ({
 export default RightDetailContainer;
 
 const FIXED_VAL = {
-  container: { width: 720, height: 1080 },
-  topContainer: { width: 670, height: 440 },
-  bottomContainer: { width: 670, height: 325 },
+  container: { width: 720 * 0.8, height: 1080 * 0.8, padding: 25 * 0.8 },
+  topContainer: { width: 670 * 0.8, height: 440 * 0.8 },
+  bottomContainer: { width: 670 * 0.8, height: 325 * 0.8 },
+  iconContainer: { margin: 30 * 0.8 },
 };
 
 const STDContainer = styled.div`
-  padding: ${25 * 0.4}px;
+  padding: ${FIXED_VAL.container.padding * 0.4}px;
   padding-bottom: 0;
   width: ${FIXED_VAL.container.width * 0.4}px;
   height: ${FIXED_VAL.container.height * 0.4}px;
 
   @media ${device.laptopL} {
-    padding: ${25 * 0.6}px;
+    padding: ${FIXED_VAL.container.padding * 0.6}px;
     padding-bottom: 0;
     width: ${FIXED_VAL.container.width * 0.6}px;
     height: ${FIXED_VAL.container.height * 0.6}px;
   }
 
   @media ${device.desktopL} {
-    padding: 25px;
+    padding: ${FIXED_VAL.container.padding * 0.8}px;
     padding-bottom: 0;
     width: ${FIXED_VAL.container.width}px;
     height: ${FIXED_VAL.container.height}px;
@@ -179,16 +180,13 @@ const STDBottomImgContainer = styled.img`
 const STDIconsContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: ${30 * 0.4}px;
-  margin-bottom: ${30 * 0.4}px;
+  margin: ${FIXED_VAL.iconContainer.margin * 0.4}px 0;
 
   @media ${device.laptopL} {
-    margin-top: ${30 * 0.6}px;
-    margin-bottom: ${30 * 0.6}px;
+    margin: ${FIXED_VAL.iconContainer.margin * 0.6}px 0;
   }
 
   @media ${device.desktopL} {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin: ${FIXED_VAL.iconContainer.margin}px 0;
   }
 `;

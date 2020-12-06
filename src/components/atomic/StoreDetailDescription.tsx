@@ -31,6 +31,8 @@ const StoreDetailDescription: React.FC<IProp> = ({
 
 export default StoreDetailDescription;
 
+const FIXED_SIZE = { icon: { width: 85 * 0.8, height: 85 * 0.8 } };
+
 const STDDescription = styled.div<IDescriptionSize>`
   ${mixin.flexSet("flex-start")}
 
@@ -38,36 +40,38 @@ const STDDescription = styled.div<IDescriptionSize>`
     css`
       width: ${textWidth * 0.4}px;
       height: ${textHeight * 0.4}px;
-      font-size: ${20 * 0.4}px;
-      padding: ${15 * 0.4}px;
+      font-size: ${20 * 0.4 * 0.8}px;
+      padding: ${15 * 0.4 * 0.8}px;
+      -webkit-transform: scale(0.83);
 
       @media ${device.laptopL} {
         width: ${textWidth * 0.6}px;
         height: ${textHeight * 0.6}px;
-        font-size: ${20 * 0.6}px;
-        padding: ${15 * 0.6}px;
+        font-size: ${20 * 0.6 * 0.8}px;
+        padding: ${15 * 0.6 * 0.8}px;
+        -webkit-transform: scale(0.83);
       }
 
       @media ${device.desktopL} {
         width: ${textWidth}px;
         height: ${textHeight}px;
-        font-size: 20px;
-        padding: 15px;
+        font-size: ${20 * 0.8}px;
+        padding: ${15 * 0.8}px;
       }
     `}
 `;
 
 const STDIcon = styled.img`
-  width: ${85 * 0.4}px;
-  height: ${85 * 0.4}px;
+  width: ${FIXED_SIZE.icon.width * 0.4}px;
+  height: ${FIXED_SIZE.icon.height * 0.4}px;
 
   @media ${device.laptopL} {
-    width: ${85 * 0.6}px;
-    height: ${85 * 0.6}px;
+    width: ${FIXED_SIZE.icon.width * 0.6}px;
+    height: ${FIXED_SIZE.icon.height * 0.6}px;
   }
 
   @media ${device.desktopL} {
-    width: 85px;
-    height: 85px;
+    width: ${FIXED_SIZE.icon.width}px;
+    height: ${FIXED_SIZE.icon.height}px;
   }
 `;
