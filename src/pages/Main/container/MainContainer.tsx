@@ -1,43 +1,15 @@
-import React, { useState } from "react";
-import { MainScreen } from "../Screens/MainScreen";
-import { ModalScreen } from "../Screens/ModalScreen";
+import React from "react";
 import { useGetActiveModal } from "hooks";
+import { MainScreen } from "../Screens/MainScreen";
+import ModalContainer from "./ModalContainer";
 
 export const MainContainer = () => {
-  const [isLeftClicked, setIsLeftClicked] = useState(false);
-  const [isRightClicked, setIsRightClicked] = useState(false);
-  const [isLeftFadeoutOn, setIsLeftFadeoutOn] = useState(false);
-  const [isRightFadeoutOn, setIsRightFadeoutOn] = useState(false);
   const activeModal = useGetActiveModal();
-
-  const leftClickToggle = (bool: boolean) => {
-    setIsLeftClicked(bool);
-  };
-
-  const rightClickToggle = (bool: boolean) => {
-    setIsRightClicked(bool);
-  };
-
-  const onClickSetFadeout = (spot: string, bool: boolean) => {
-    if (spot === "left") setIsLeftFadeoutOn(bool);
-    if (spot === "right") setIsRightFadeoutOn(bool);
-  };
 
   return (
     <>
       <MainScreen mainData={MAIN_DATA} />
-      {activeModal !== null && (
-        <ModalScreen
-          rightData={RIGHTDATA}
-          isLeftClicked={isLeftClicked}
-          isRightClicked={isRightClicked}
-          isLeftFadeoutOn={isLeftFadeoutOn}
-          isRightFadeoutOn={isRightFadeoutOn}
-          leftClickToggle={leftClickToggle}
-          rightClickToggle={rightClickToggle}
-          onClickSetFadeout={onClickSetFadeout}
-        />
-      )}
+      {activeModal !== null && <ModalContainer rightData={RIGHTDATA} />}
     </>
   );
 };

@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { ItemModal } from "components";
 import { useDispatch } from "react-redux";
-import { modalToggle } from "modules";
 import { useGetData } from "hooks";
+import { modalToggle } from "modules";
+import { ItemModal } from "components";
 import mixin from "styles/mixin";
 
 interface IData {
@@ -47,15 +47,6 @@ export const ModalScreen: React.FC<IProp> = ({
     positionY,
     positionX,
   } = currentData;
-
-  useEffect(() => {
-    return () => {
-      leftClickToggle(false);
-      rightClickToggle(false);
-      onClickSetFadeout("left", false);
-      onClickSetFadeout("right", false);
-    };
-  }, []);
 
   return (
     <STDContainer>
