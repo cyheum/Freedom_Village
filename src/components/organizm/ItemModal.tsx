@@ -26,11 +26,11 @@ interface IProp {
   rightBottomData: IData[];
   isLeftClicked: boolean;
   isRightClicked: boolean;
-  isFadeoutOn: boolean;
+  isLeftFadeoutOn: boolean;
+  isRightFadeoutOn: boolean;
   leftClickToggle: (bool: boolean) => void;
   rightClickToggle: (bool: boolean) => void;
-  onClickFadeout: () => void;
-  onClickSetFadeout: (bool: boolean) => void;
+  onClickSetFadeout: (spot: string, bool: boolean) => void;
 }
 
 export const ItemModal: React.FC<IProp> = ({
@@ -48,7 +48,8 @@ export const ItemModal: React.FC<IProp> = ({
   rightBottomData,
   isLeftClicked,
   isRightClicked,
-  isFadeoutOn,
+  isLeftFadeoutOn,
+  isRightFadeoutOn,
   leftClickToggle,
   rightClickToggle,
   onClickSetFadeout,
@@ -63,9 +64,9 @@ export const ItemModal: React.FC<IProp> = ({
         mapImgSrc={mapImgSrc}
         roadImgSrc={roadImgSrc}
         isLeftClicked={isLeftClicked}
-        isFadeoutOn={isFadeoutOn}
+        isLeftFadeoutOn={isLeftFadeoutOn}
         onClickSetFadeout={() => {
-          onClickSetFadeout(true);
+          onClickSetFadeout("left", true);
           setTimeout(() => leftClickToggle(true), 1200);
         }}
       />
@@ -77,7 +78,11 @@ export const ItemModal: React.FC<IProp> = ({
         rightBottomData={rightBottomData}
         bottomEmptyBlur={bottomEmptyBlur}
         isRightClicked={isRightClicked}
-        rightClickToggle={rightClickToggle}
+        isRightFadeoutOn={isRightFadeoutOn}
+        onClickSetFadeout={() => {
+          onClickSetFadeout("right", true);
+          setTimeout(() => rightClickToggle(true), 1200);
+        }}
       />
     </STDModal>
   );

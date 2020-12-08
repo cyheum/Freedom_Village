@@ -20,21 +20,21 @@ interface IProp {
   };
   isLeftClicked: boolean;
   isRightClicked: boolean;
-  isFadeoutOn: boolean;
+  isLeftFadeoutOn: boolean;
+  isRightFadeoutOn: boolean;
   leftClickToggle: (bool: boolean) => void;
   rightClickToggle: (bool: boolean) => void;
-  onClickFadeout: () => void;
-  onClickSetFadeout: (bool: boolean) => void;
+  onClickSetFadeout: (spot: string, bool: boolean) => void;
 }
 
 export const ModalScreen: React.FC<IProp> = ({
   rightData,
   isLeftClicked,
   isRightClicked,
-  isFadeoutOn,
+  isLeftFadeoutOn,
+  isRightFadeoutOn,
   leftClickToggle,
   rightClickToggle,
-  onClickFadeout,
   onClickSetFadeout,
 }) => {
   const currentData = useGetData();
@@ -52,7 +52,8 @@ export const ModalScreen: React.FC<IProp> = ({
     return () => {
       leftClickToggle(false);
       rightClickToggle(false);
-      onClickSetFadeout(false);
+      onClickSetFadeout("left", false);
+      onClickSetFadeout("right", false);
     };
   }, []);
 
@@ -79,10 +80,10 @@ export const ModalScreen: React.FC<IProp> = ({
         rightBottomData={rightData.rightBottomData}
         isLeftClicked={isLeftClicked}
         isRightClicked={isRightClicked}
-        isFadeoutOn={isFadeoutOn}
+        isLeftFadeoutOn={isLeftFadeoutOn}
+        isRightFadeoutOn={isRightFadeoutOn}
         leftClickToggle={leftClickToggle}
         rightClickToggle={rightClickToggle}
-        onClickFadeout={onClickFadeout}
         onClickSetFadeout={onClickSetFadeout}
       />
     </STDContainer>

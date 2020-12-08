@@ -1,7 +1,12 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { device } from "styles/theme";
 import StoreDetailDescription from "../atomic/StoreDetailDescription";
+
+interface IBlur {
+  emptyBlur: string;
+  isRightFadeoutOn: boolean;
+}
 
 interface IData {
   iconSrc: string;
@@ -18,7 +23,8 @@ interface IProp {
   rightTopData: IData[];
   rightBottomData: IData[];
   isRightClicked: boolean;
-  rightClickToggle: (bool: boolean) => void;
+  isRightFadeoutOn: boolean;
+  onClickSetFadeout: () => void;
 }
 
 const RightDetailContainer: React.FC<IProp> = ({
@@ -29,18 +35,19 @@ const RightDetailContainer: React.FC<IProp> = ({
   rightTopData,
   rightBottomData,
   isRightClicked,
-  rightClickToggle,
+  isRightFadeoutOn,
+  onClickSetFadeout,
 }) => {
   return (
-    <STDContainer onClick={() => rightClickToggle(true)}>
-      <STDTopContainer>
+    <STDContainer>
+      <STDTopContainer onClick={() => onClickSetFadeout()}>
         {!isRightClicked && (
-          <STDTopBlurBox src={topEmptyBlur} alt="storeLogo" />
+          <STDTopBlurBox
+            emptyBlur={topEmptyBlur}
+            isRightFadeoutOn={isRightFadeoutOn}
+          />
         )}
-        <STDTopImgContainer
-          alt="storeImg2"
-          src={rightTopImgSrc}
-        ></STDTopImgContainer>
+        <STDTopImgContainer alt="storeImg2" src={rightTopImgSrc} />
       </STDTopContainer>
       <STDIconsContainer>
         {rightTopData.map(
@@ -57,12 +64,14 @@ const RightDetailContainer: React.FC<IProp> = ({
           }
         )}
       </STDIconsContainer>
-      <STDBottomContainer>
-        {!isRightClicked && <STDBottomBlurBox emptyBlur={bottomEmptyBlur} />}
-        <STDBottomImgContainer
-          alt="storeImg2"
-          src={rightBottomImgSrc}
-        ></STDBottomImgContainer>
+      <STDBottomContainer onClick={() => onClickSetFadeout()}>
+        {!isRightClicked && (
+          <STDBottomBlurBox
+            emptyBlur={bottomEmptyBlur}
+            isRightFadeoutOn={isRightFadeoutOn}
+          />
+        )}
+        <STDBottomImgContainer alt="storeImg2" src={rightBottomImgSrc} />
       </STDBottomContainer>
       <STDIconsContainer>
         {rightBottomData.map(
@@ -91,6 +100,16 @@ const FIXED_VAL = {
   bottomContainer: { width: 670 * 0.8, height: 325 * 0.8 },
   iconContainer: { margin: 30 * 0.8 },
 };
+
+const fadeout = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+`;
 
 const STDContainer = styled.div`
   padding: ${FIXED_VAL.container.padding * 0.4}px;
@@ -145,21 +164,7 @@ const STDBottomContainer = styled.div`
   }
 `;
 
-const STDTopBlurBox = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`;
-
-const STDTopImgContainer = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
-const STDBottomBlurBox = styled.div<{ emptyBlur: string }>`
+const STDTopBlurBox = styled.img<IBlur>`
   position: absolute;
   top: 0;
   left: 0;
@@ -169,6 +174,34 @@ const STDBottomBlurBox = styled.div<{ emptyBlur: string }>`
     background: url(${emptyBlur});
     background-size: cover;
   `}
+  ${({ isRightFadeoutOn }) =>
+    isRightFadeoutOn &&
+    css`
+      animation: ${fadeout} 1200ms linear normal forwards;
+    `}
+`;
+
+const STDTopImgContainer = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const STDBottomBlurBox = styled.div<IBlur>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  ${({ emptyBlur }) => css`
+    background: url(${emptyBlur});
+    background-size: cover;
+  `}
+  ${({ isRightFadeoutOn }) =>
+    isRightFadeoutOn &&
+    css`
+      animation: ${fadeout} 1200ms linear normal forwards;
+    `}
 `;
 
 const STDBottomImgContainer = styled.img`

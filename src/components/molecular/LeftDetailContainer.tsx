@@ -9,12 +9,15 @@ interface ILabel {
   positionY: number;
 }
 
-interface IProp extends ILabel {
+interface ILogo {
+  roadImgSrc: string;
+  isLeftFadeoutOn: boolean;
+}
+
+interface IProp extends ILabel, ILogo {
   labelSrc: string;
   mapImgSrc: string;
-  roadImgSrc: string;
   isLeftClicked: boolean;
-  isFadeoutOn: boolean;
   onClickSetFadeout: () => void;
 }
 
@@ -26,7 +29,7 @@ const LeftDetailContainer: React.FC<IProp> = ({
   mapImgSrc,
   roadImgSrc,
   isLeftClicked,
-  isFadeoutOn,
+  isLeftFadeoutOn,
   onClickSetFadeout,
 }) => {
   return (
@@ -42,7 +45,7 @@ const LeftDetailContainer: React.FC<IProp> = ({
       {!isLeftClicked && (
         <STDRoadLogo
           roadImgSrc={roadImgSrc}
-          isFadeoutOn={isFadeoutOn}
+          isLeftFadeoutOn={isLeftFadeoutOn}
           onClick={() => onClickSetFadeout()}
         />
       )}
@@ -88,7 +91,7 @@ const STDLeftMap = styled.div<{ mapImgSrc: string }>`
     `}
 `;
 
-const STDRoadLogo = styled.div<{ roadImgSrc: string; isFadeoutOn: boolean }>`
+const STDRoadLogo = styled.div<ILogo>`
   position: absolute;
   top: 0;
   left: 0;
@@ -99,8 +102,8 @@ const STDRoadLogo = styled.div<{ roadImgSrc: string; isFadeoutOn: boolean }>`
     background: url(${roadImgSrc});
     background-size: contain;
   `}
-  ${({ isFadeoutOn }) =>
-    isFadeoutOn &&
+  ${({ isLeftFadeoutOn }) =>
+    isLeftFadeoutOn &&
     css`
       animation: ${fadeout} 1200ms linear normal forwards;
     `}

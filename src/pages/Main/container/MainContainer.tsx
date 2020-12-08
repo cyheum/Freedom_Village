@@ -6,7 +6,8 @@ import { useGetActiveModal } from "hooks";
 export const MainContainer = () => {
   const [isLeftClicked, setIsLeftClicked] = useState(false);
   const [isRightClicked, setIsRightClicked] = useState(false);
-  const [isFadeoutOn, setIsFadeoutOn] = useState(false);
+  const [isLeftFadeoutOn, setIsLeftFadeoutOn] = useState(false);
+  const [isRightFadeoutOn, setIsRightFadeoutOn] = useState(false);
   const activeModal = useGetActiveModal();
 
   const leftClickToggle = (bool: boolean) => {
@@ -17,13 +18,9 @@ export const MainContainer = () => {
     setIsRightClicked(bool);
   };
 
-  const onClickFadeout = () => {
-    setIsFadeoutOn(true);
-    setTimeout(() => setIsLeftClicked(true), 1300);
-  };
-
-  const onClickSetFadeout = (bool: boolean) => {
-    setIsFadeoutOn(bool);
+  const onClickSetFadeout = (spot: string, bool: boolean) => {
+    if (spot === "left") setIsLeftFadeoutOn(bool);
+    if (spot === "right") setIsRightFadeoutOn(bool);
   };
 
   return (
@@ -34,10 +31,10 @@ export const MainContainer = () => {
           rightData={RIGHTDATA}
           isLeftClicked={isLeftClicked}
           isRightClicked={isRightClicked}
-          isFadeoutOn={isFadeoutOn}
+          isLeftFadeoutOn={isLeftFadeoutOn}
+          isRightFadeoutOn={isRightFadeoutOn}
           leftClickToggle={leftClickToggle}
           rightClickToggle={rightClickToggle}
-          onClickFadeout={onClickFadeout}
           onClickSetFadeout={onClickSetFadeout}
         />
       )}
