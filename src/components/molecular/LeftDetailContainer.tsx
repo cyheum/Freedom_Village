@@ -1,7 +1,7 @@
-import React from "react";
-import styled, { css, keyframes } from "styled-components";
-import mixin from "styles/mixin";
-import { device } from "styles/theme";
+import React from 'react';
+import styled, { css, keyframes } from 'styled-components';
+import mixin from 'styles/mixin';
+import { device } from 'styles/theme';
 
 interface ILabel {
   type: string;
@@ -76,6 +76,8 @@ const FIXED_VAL = {
   },
 };
 
+const RATIO = { tablet: 0.5, laptop: 0.7 };
+
 const STDContainer = styled.div`
   position: relative;
   ${mixin.dynamicScreen(FIXED_VAL.container.width, FIXED_VAL.container.height)}
@@ -113,14 +115,22 @@ const STDLabel = styled.img<ILabel>`
   position: absolute;
   z-index: 1000;
   ${({ type, positionX, positionY }) => css`
-    width: ${FIXED_VAL.label.width * 0.4};
-    height: ${FIXED_VAL.label.height * 0.4}px;
-    ${mixin.getPosition(type, positionX * 0.4, positionY * 0.4)}
+    width: ${FIXED_VAL.label.width * RATIO.tablet};
+    height: ${FIXED_VAL.label.height * RATIO.tablet}px;
+    ${mixin.getPosition(
+      type,
+      positionX * RATIO.tablet,
+      positionY * RATIO.tablet
+    )}
 
     @media ${device.laptopL} {
-      width: ${FIXED_VAL.label.width * 0.6}px;
-      height: ${FIXED_VAL.label.height * 0.6}px;
-      ${mixin.getPosition(type, positionX * 0.6, positionY * 0.6)}
+      width: ${FIXED_VAL.label.width * RATIO.laptop}px;
+      height: ${FIXED_VAL.label.height * RATIO.laptop}px;
+      ${mixin.getPosition(
+        type,
+        positionX * RATIO.laptop,
+        positionY * RATIO.laptop
+      )}
     }
 
     @media ${device.desktopL} {

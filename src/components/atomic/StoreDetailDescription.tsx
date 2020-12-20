@@ -1,7 +1,7 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { device } from "styles/theme";
-import mixin from "styles/mixin";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { device } from 'styles/theme';
+import mixin from 'styles/mixin';
 
 interface IDescriptionSize {
   textWidth: number;
@@ -32,21 +32,22 @@ const StoreDetailDescription: React.FC<IProp> = ({
 export default StoreDetailDescription;
 
 const FIXED_SIZE = { icon: { width: 85 * 0.8, height: 85 * 0.8 } };
+const RATIO = { tablet: 0.5, laptop: 0.7 };
 
 const STDDescription = styled.div<IDescriptionSize>`
-  ${mixin.flexSet("flex-start")}
+  ${mixin.flexSet('flex-start')}
 
   ${({ textWidth, textHeight }) =>
     css`
-      width: ${textWidth * 0.4}px;
-      height: ${textHeight * 0.4}px;
-      font-size: ${20 * 0.4 * 0.8}px;
+      width: ${textWidth * RATIO.tablet}px;
+      height: ${textHeight * RATIO.tablet}px;
+      font-size: ${20 * RATIO.tablet * 0.8}px;
       -webkit-transform: scale(0.63);
 
       @media ${device.laptopL} {
-        width: ${textWidth * 0.6}px;
-        height: ${textHeight * 0.6}px;
-        font-size: ${20 * 0.6 * 0.8}px;
+        width: ${textWidth * RATIO.laptop}px;
+        height: ${textHeight * RATIO.laptop}px;
+        font-size: ${20 * RATIO.laptop * 0.8}px;
         -webkit-transform: scale(0.83);
       }
 
@@ -60,12 +61,12 @@ const STDDescription = styled.div<IDescriptionSize>`
 `;
 
 const STDIcon = styled.img`
-  width: ${FIXED_SIZE.icon.width * 0.4}px;
-  height: ${FIXED_SIZE.icon.height * 0.4}px;
+  width: ${FIXED_SIZE.icon.width * RATIO.tablet}px;
+  height: ${FIXED_SIZE.icon.height * RATIO.tablet}px;
 
   @media ${device.laptopL} {
-    width: ${FIXED_SIZE.icon.width * 0.6}px;
-    height: ${FIXED_SIZE.icon.height * 0.6}px;
+    width: ${FIXED_SIZE.icon.width * RATIO.laptop}px;
+    height: ${FIXED_SIZE.icon.height * RATIO.laptop}px;
   }
 
   @media ${device.desktopL} {

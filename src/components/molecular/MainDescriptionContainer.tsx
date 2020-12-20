@@ -1,8 +1,8 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { device } from "styles/theme";
-import { IStoreData } from "modules";
-import StoreMainDescription from "../atomic/StoreMainDescription";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { device } from 'styles/theme';
+import { IStoreData } from 'modules';
+import StoreMainDescription from '../atomic/StoreMainDescription';
 
 interface IContainerProp {
   marginTop: number;
@@ -46,21 +46,20 @@ const CONTAINER_SIZE = {
   height: 1080,
 };
 
+const RATIO = { tablet: 0.5, laptop: 0.7 };
+
 const STDContainer = styled.div<IContainerProp>`
   ${({ marginTop }) => css`
-    width: ${CONTAINER_SIZE.width * 0.4}px;
-    height: ${CONTAINER_SIZE.height * 0.4}px;
-    margin-top: ${marginTop * 0.4}px;
+    width: ${CONTAINER_SIZE.width * RATIO.tablet}px;
+    margin-top: ${marginTop * RATIO.tablet}px;
 
     @media ${device.laptopL} {
-      width: ${CONTAINER_SIZE.width * 0.6}px;
-      height: ${CONTAINER_SIZE.height * 0.6}px;
-      margin-top: ${marginTop * 0.6}px;
+      width: ${CONTAINER_SIZE.width * RATIO.laptop}px;
+      margin-top: ${marginTop * RATIO.laptop}px;
     }
 
     @media ${device.desktopL} {
       width: ${CONTAINER_SIZE.width}px;
-      height: ${CONTAINER_SIZE.height}px;
       margin-top: ${marginTop}px;
     }
   `}

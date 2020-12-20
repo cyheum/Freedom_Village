@@ -1,16 +1,16 @@
-import { css } from "styled-components";
-import { device } from "styles/theme";
+import { css } from 'styled-components';
+import { device } from 'styles/theme';
 
-const ratio = {
-  tablet: 0.4,
-  laptop: 0.6,
+const RATIO = {
+  tablet: 0.5,
+  laptop: 0.7,
 };
 
 const mixin = {
   flexSet: (
-    justifyContent = "center",
-    alignItems = "center",
-    flexDirection = "row"
+    justifyContent = 'center',
+    alignItems = 'center',
+    flexDirection = 'row'
   ) => css`
     display: flex;
     justify-content: ${justifyContent};
@@ -19,25 +19,25 @@ const mixin = {
   `,
   getPosition: (type: string, X: number, Y: number) => {
     switch (type) {
-      case "LEFT_TOP_LIST":
+      case 'LEFT_TOP_LIST':
         return `top: ${Y}px; left: ${X}px;`;
-      case "LEFT_BOTTOM_LIST":
+      case 'LEFT_BOTTOM_LIST':
         return `bottom: ${Y}px; left: ${X}px;`;
-      case "RIGHT_LIST":
+      case 'RIGHT_LIST':
         return `top: ${Y}px; right: ${X}px; `;
     }
   },
   dynamicScreen: (width = 0, height = 0, padding = [0, 0, 0, 0]) => css`
-    width: ${width * ratio.tablet}px;
-    height: ${height * ratio.tablet}px;
-    padding: ${padding[0] * ratio.tablet}px ${padding[1] * ratio.tablet}px
-      ${padding[2] * ratio.tablet}px ${padding[3] * ratio.tablet}px;
+    width: ${width * RATIO.tablet}px;
+    height: ${height * RATIO.tablet}px;
+    padding: ${padding[0] * RATIO.tablet}px ${padding[1] * RATIO.tablet}px
+      ${padding[2] * RATIO.tablet}px ${padding[3] * RATIO.tablet}px;
 
     @media ${device.laptopL} {
-      width: ${width * ratio.laptop}px;
-      height: ${height * ratio.laptop}px;
-      padding: ${padding[0] * ratio.laptop}px ${padding[1] * ratio.laptop}px
-        ${padding[2] * ratio.laptop}px ${padding[3] * ratio.laptop}px;
+      width: ${width * RATIO.laptop}px;
+      height: ${height * RATIO.laptop}px;
+      padding: ${padding[0] * RATIO.laptop}px ${padding[1] * RATIO.laptop}px
+        ${padding[2] * RATIO.laptop}px ${padding[3] * RATIO.laptop}px;
     }
 
     @media ${device.desktopL} {

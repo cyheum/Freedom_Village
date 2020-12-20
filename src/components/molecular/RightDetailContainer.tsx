@@ -1,7 +1,7 @@
-import React from "react";
-import styled, { css, keyframes } from "styled-components";
-import { device } from "styles/theme";
-import StoreDetailDescription from "../atomic/StoreDetailDescription";
+import React from 'react';
+import styled, { css, keyframes } from 'styled-components';
+import { device } from 'styles/theme';
+import StoreDetailDescription from '../atomic/StoreDetailDescription';
 
 interface IBlur {
   emptyBlur: string;
@@ -101,6 +101,8 @@ const FIXED_VAL = {
   iconContainer: { margin: 30 * 0.8 },
 };
 
+const RATIO = { tablet: 0.5, laptop: 0.7 };
+
 const fadeout = keyframes`
   from {
     opacity: 1;
@@ -112,16 +114,16 @@ const fadeout = keyframes`
 `;
 
 const STDContainer = styled.div`
-  padding: ${FIXED_VAL.container.padding * 0.4}px;
+  padding: ${FIXED_VAL.container.padding * RATIO.tablet}px;
   padding-bottom: 0;
-  width: ${FIXED_VAL.container.width * 0.4}px;
-  height: ${FIXED_VAL.container.height * 0.4}px;
+  width: ${FIXED_VAL.container.width * RATIO.tablet}px;
+  height: ${FIXED_VAL.container.height * RATIO.tablet}px;
 
   @media ${device.laptopL} {
-    padding: ${FIXED_VAL.container.padding * 0.6}px;
+    padding: ${FIXED_VAL.container.padding * RATIO.laptop}px;
     padding-bottom: 0;
-    width: ${FIXED_VAL.container.width * 0.6}px;
-    height: ${FIXED_VAL.container.height * 0.6}px;
+    width: ${FIXED_VAL.container.width * RATIO.laptop}px;
+    height: ${FIXED_VAL.container.height * RATIO.laptop}px;
   }
 
   @media ${device.desktopL} {
@@ -134,12 +136,12 @@ const STDContainer = styled.div`
 
 const STDTopContainer = styled.div`
   position: relative;
-  width: ${FIXED_VAL.topContainer.width * 0.4}px;
-  height: ${FIXED_VAL.topContainer.height * 0.4}px;
+  width: ${FIXED_VAL.topContainer.width * RATIO.tablet}px;
+  height: ${FIXED_VAL.topContainer.height * RATIO.tablet}px;
 
   @media ${device.laptopL} {
-    width: ${FIXED_VAL.topContainer.width * 0.6}px;
-    height: ${FIXED_VAL.topContainer.height * 0.6}px;
+    width: ${FIXED_VAL.topContainer.width * RATIO.laptop}px;
+    height: ${FIXED_VAL.topContainer.height * RATIO.laptop}px;
   }
 
   @media ${device.desktopL} {
@@ -150,12 +152,12 @@ const STDTopContainer = styled.div`
 
 const STDBottomContainer = styled.div`
   position: relative;
-  width: ${FIXED_VAL.bottomContainer.width * 0.4}px;
-  height: ${FIXED_VAL.bottomContainer.height * 0.4}px;
+  width: ${FIXED_VAL.bottomContainer.width * RATIO.tablet}px;
+  height: ${FIXED_VAL.bottomContainer.height * RATIO.tablet}px;
 
   @media ${device.laptopL} {
-    width: ${FIXED_VAL.bottomContainer.width * 0.6}px;
-    height: ${FIXED_VAL.bottomContainer.height * 0.6}px;
+    width: ${FIXED_VAL.bottomContainer.width * RATIO.laptop}px;
+    height: ${FIXED_VAL.bottomContainer.height * RATIO.laptop}px;
   }
 
   @media ${device.desktopL} {
@@ -213,10 +215,10 @@ const STDBottomImgContainer = styled.img`
 const STDIconsContainer = styled.div`
   display: flex;
   align-items: center;
-  margin: ${FIXED_VAL.iconContainer.margin * 0.4}px 0;
+  margin: ${FIXED_VAL.iconContainer.margin * RATIO.tablet}px 0;
 
   @media ${device.laptopL} {
-    margin: ${FIXED_VAL.iconContainer.margin * 0.6}px 0;
+    margin: ${FIXED_VAL.iconContainer.margin * RATIO.laptop}px 0;
   }
 
   @media ${device.desktopL} {
