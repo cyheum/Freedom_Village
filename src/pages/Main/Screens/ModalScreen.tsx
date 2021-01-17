@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { useGetData } from "hooks";
-import { modalToggle } from "modules";
-import { ItemModal } from "components";
-import mixin from "styles/mixin";
+import React from 'react';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { useGetData } from 'hooks';
+import { modalToggle } from 'modules';
+import { ItemModal } from 'components';
+import mixin from 'styles/mixin';
 
 interface IData {
   iconSrc: string;
@@ -46,27 +46,29 @@ export const ModalScreen: React.FC<IProp> = ({
     rightBottomImgSrc,
     positionY,
     positionX,
+    links,
   } = currentData;
 
+  console.log(currentData);
   return (
     <STDContainer>
       <STDemtpty onClick={() => dispatch(modalToggle(null))} />
       <ItemModal
         mapImgSrc={`/Images/${
-          currentData.type === "LEFT_TOP_LIST" ||
-          currentData.type === "LEFT_BOTTOM_LIST"
-            ? "leftMap2"
-            : "leftMap1"
+          currentData.type === 'LEFT_TOP_LIST' ||
+          currentData.type === 'LEFT_BOTTOM_LIST'
+            ? 'leftMap2'
+            : 'leftMap1'
         }.png`}
         type={type}
         labelSrc={label}
         positionX={positionX}
         positionY={positionY}
-        roadImgSrc={"/Images/streetLogo.png"}
+        roadImgSrc={'/Images/streetLogo.png'}
         rightTopImgSrc={rightTopImgSrc}
         rightBottomImgSrc={rightBottomImgSrc}
-        topEmptyBlur={"/Images/emptyBlur1.png"}
-        bottomEmptyBlur={"/Images/emptyBlur2.png"}
+        topEmptyBlur={'/Images/emptyBlur1.png'}
+        bottomEmptyBlur={'/Images/emptyBlur2.png'}
         rightTopData={rightData.rightTopData}
         rightBottomData={rightData.rightBottomData}
         isLeftClicked={isLeftClicked}
@@ -76,6 +78,7 @@ export const ModalScreen: React.FC<IProp> = ({
         leftClickToggle={leftClickToggle}
         rightClickToggle={rightClickToggle}
         onClickSetFadeout={onClickSetFadeout}
+        links={links}
       />
     </STDContainer>
   );

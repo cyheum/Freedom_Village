@@ -1,4 +1,9 @@
-import { GET_DATA, MODAL_TOGGLE } from "./store";
+import { GET_DATA, MODAL_TOGGLE } from './store';
+
+export interface ILinks {
+  top: string[];
+  bottom: string[];
+}
 
 export interface IStoreData {
   id: string;
@@ -9,6 +14,7 @@ export interface IStoreData {
   rightBottomImgSrc: string;
   positionX: number;
   positionY: number;
+  links: ILinks;
 }
 
 export interface IStoreState {

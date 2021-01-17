@@ -1,8 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import LeftDetailContainer from "../molecular/LeftDetailContainer";
-import RightDetailContainer from "../molecular/RightDetailContainer";
-import mixin from "styles/mixin";
+import React from 'react';
+import styled from 'styled-components';
+import LeftDetailContainer from '../molecular/LeftDetailContainer';
+import RightDetailContainer from '../molecular/RightDetailContainer';
+import mixin from 'styles/mixin';
+import { ILinks } from 'modules/store.interface';
 
 interface IData {
   iconSrc: string;
@@ -31,10 +32,12 @@ interface IProp {
   leftClickToggle: (bool: boolean) => void;
   rightClickToggle: (bool: boolean) => void;
   onClickSetFadeout: (spot: string, bool: boolean) => void;
+  links: ILinks;
 }
 
 export const ItemModal: React.FC<IProp> = ({
   type,
+  links,
   labelSrc,
   positionX,
   positionY,
@@ -66,11 +69,12 @@ export const ItemModal: React.FC<IProp> = ({
         isLeftClicked={isLeftClicked}
         isLeftFadeoutOn={isLeftFadeoutOn}
         onClickSetFadeout={() => {
-          onClickSetFadeout("left", true);
+          onClickSetFadeout('left', true);
           setTimeout(() => leftClickToggle(true), 1200);
         }}
       />
       <RightDetailContainer
+        links={links}
         topEmptyBlur={topEmptyBlur}
         rightTopImgSrc={rightTopImgSrc}
         rightTopData={rightTopData}
@@ -80,7 +84,7 @@ export const ItemModal: React.FC<IProp> = ({
         isRightClicked={isRightClicked}
         isRightFadeoutOn={isRightFadeoutOn}
         onClickSetFadeout={() => {
-          onClickSetFadeout("right", true);
+          onClickSetFadeout('right', true);
           setTimeout(() => rightClickToggle(true), 1200);
         }}
       />

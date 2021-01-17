@@ -1,3 +1,4 @@
+import { ILinks } from 'modules';
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { device } from 'styles/theme';
@@ -16,6 +17,7 @@ interface IData {
 }
 
 interface IProp {
+  links: ILinks;
   rightTopImgSrc: string;
   rightBottomImgSrc: string;
   topEmptyBlur: string;
@@ -28,6 +30,7 @@ interface IProp {
 }
 
 const RightDetailContainer: React.FC<IProp> = ({
+  links,
   rightTopImgSrc,
   rightBottomImgSrc,
   topEmptyBlur,
@@ -55,6 +58,7 @@ const RightDetailContainer: React.FC<IProp> = ({
             return (
               <StoreDetailDescription
                 key={idx}
+                link={links.top[idx]}
                 iconSrc={iconSrc}
                 description={description}
                 textWidth={textWidth}
@@ -79,6 +83,7 @@ const RightDetailContainer: React.FC<IProp> = ({
             return (
               <StoreDetailDescription
                 key={idx}
+                link={links.bottom[idx]}
                 iconSrc={iconSrc}
                 description={description}
                 textWidth={textWidth}

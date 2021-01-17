@@ -9,23 +9,25 @@ interface IDescriptionSize {
 }
 
 interface IProp extends IDescriptionSize {
+  link: string;
   iconSrc: string;
   description: string;
 }
 
 const StoreDetailDescription: React.FC<IProp> = ({
+  link,
   iconSrc,
   description,
   textWidth,
   textHeight,
 }) => {
   return (
-    <>
+    <STDContainer href={link}>
       <STDIcon alt="storeIcon" src={iconSrc} />
       <STDDescription textWidth={textWidth} textHeight={textHeight}>
         {description}
       </STDDescription>
-    </>
+    </STDContainer>
   );
 };
 
@@ -33,6 +35,10 @@ export default StoreDetailDescription;
 
 const FIXED_SIZE = { icon: { width: 85 * 0.8, height: 85 * 0.8 } };
 const RATIO = { tablet: 0.5, laptop: 0.7 };
+
+const STDContainer = styled.a`
+  ${mixin.flexSet('flexStart')}
+`;
 
 const STDDescription = styled.div<IDescriptionSize>`
   ${mixin.flexSet('flex-start')}
